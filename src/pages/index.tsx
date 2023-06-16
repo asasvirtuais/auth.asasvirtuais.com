@@ -1,7 +1,6 @@
-"use client"
 import { Box, Button, Center, Container, Flex } from '@chakra-ui/react'
-import Footer from './(footer)'
 import Chakra from '@/chakra'
+import Footer from '../components/footer'
 
 export default function Home() {
     return (
@@ -11,7 +10,7 @@ export default function Home() {
                 <Container maxW='container.lg' h='inherit'>
                     <Center w='100%' h='inherit'>
                         <Box>
-                            <Button as='a' href='/api/login' ></Button>
+                            <Button as='a' href='/api/auth/login' >Login</Button>
                         </Box>
                     </Center>
                 </Container>
