@@ -10,7 +10,7 @@ export default function Home() {
                 <Container maxW='container.lg' h='inherit'>
                     <Center w='100%' h='inherit'>
                         <Box>
-                            <Button as='a' href='/api/login' >Login</Button>
+                            <Button as='a' href='/api/auth/login' >Login</Button>
                         </Box>
                     </Center>
                 </Container>
