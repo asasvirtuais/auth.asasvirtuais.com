@@ -13,7 +13,7 @@ export default function Home() {
                     <Center w='100%' h='inherit'>
                         <VStack w='100%'>
                             <Heading textAlign='center' w='100%' >Asas Virtuais - SSO</Heading>
-                            <Center w='100%' >
+                            <Center flexDir='column' w='100%' >
                                 { isLoading ? (
                                     <Spinner/>
                                 ) : error ? (
@@ -24,12 +24,12 @@ export default function Home() {
                                     </Alert>
                                 ) : user ? (
                                     <>
-                                        <HStack>
+                                        <VStack>
                                             <Box>Logged in as: {user.nickname}</Box>
                                             <Box>Name: {user.name}</Box>
                                             <Box>Email: {user.email}</Box>
                                             <Box>Email verified: {user.email_verified ? 'Yes':'No'}</Box>
-                                        </HStack>
+                                        </VStack>
                                         <Avatar src={user.picture ?? undefined} />
                                     </>
                                 ) : (
