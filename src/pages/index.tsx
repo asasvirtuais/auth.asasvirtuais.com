@@ -40,7 +40,7 @@ export default function Home() {
                             </Center>
                             <HStack>
                                 <Button size='lg' w='200px' colorScheme='blue' as='a' href='/api/auth/login' >Login</Button>
-                                <Button size='lg' w='200px' colorScheme='green' as='a' href='/api/auth/login' >Logout</Button>
+                                <Button size='lg' w='200px' colorScheme='green' as='a' href='/api/auth/logout' >Logout</Button>
                             </HStack>
                         </VStack>
                     </Center>
