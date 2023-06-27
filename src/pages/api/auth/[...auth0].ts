@@ -3,11 +3,15 @@ import { handleAuth, handleLogin, handleLogout, handleCallback } from '@auth0/ne
 export default handleAuth({
     async login(req, res) {
         const scope = req.query.scope ? decodeURIComponent(req.query.scope as string) : null
+        const connection = req.query.connection as string
         const authorizationParams : {
             connection_scope?: string
+            connection?: string
         } = {}
-        if ( scope )
+        if ( scope && connection ) {
+            authorizationParams.connection = connection
             authorizationParams.connection_scope = scope
+        }
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
             authorizationParams,
@@ -23,15 +27,18 @@ export default handleAuth({
             
             afterCallback(_req, res, session, state) {
                 if ( state && state.returnTo )
-                    res.redirect(decodeURIComponent(state.returnTo))
+                    res.redirect(decodeURI(state.returnTo))
                 console.log(session)
                 return session
             }
         })
     },
     async logout(req, res) {
-        await handleLogout(req, res, {
-            returnTo: req.query.returnTo as string
-        })
+        const options : {
+            returnTo?: string
+        } = {}
+        if ( req.query.returnTo )
+            options.returnTo = decodeURI(req.query.returnTo  as string)
+        await handleLogout(req, res, options)
     }
 })
