@@ -4,9 +4,6 @@ export default handleAuth({
     async login(req, res) {
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
-            authorizationParams: {
-                scope: 'email profile openid w_member_social',
-            },
             getLoginState(req) {
                 return {
                     returnTo: req.query.returnTo
