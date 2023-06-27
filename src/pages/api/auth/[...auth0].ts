@@ -5,21 +5,23 @@ export default handleAuth({
         await handleCallback(req, res, {
             redirectUri: req.query.redirectUri as string,
             authorizationParams: {
-                scope: (req.query.scope ? `${req.query.scope as string} ` : '') + 'openid profile email'
-            },
+                scope: (req.query.scope ? `${req.query.scope as string} ` : '') + 'openid profile email',
+                redirect_uri: req.query.redirectUri as string,
+            }
         })
     },
     async login(req, res) {
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
             authorizationParams: {
-                scope: (req.query.scope ? `${req.query.scope as string} ` : '') + 'openid profile email'
+                scope: (req.query.scope ? `${req.query.scope as string} ` : '') + 'openid profile email',
+                redirect_uri: req.query.redirectUri as string,
             }
         })
     },
     async logout(req, res) {
         await handleLogout(req, res, {
-            returnTo: req.query.returnTo as string,
+            returnTo: req.query.returnTo as string
         })
     }
 })
