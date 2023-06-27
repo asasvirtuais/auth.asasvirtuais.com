@@ -5,7 +5,7 @@ export default handleAuth({
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
             authorizationParams: {
-                scope: 'openid profile email' + req.query.scope ? ` ${req.query.scope as string}` : ''
+                scope: (req.query.scope ? `${req.query.scope as string} ` : '') + 'openid profile email'
             }
         })
     },
