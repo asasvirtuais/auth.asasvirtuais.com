@@ -2,8 +2,15 @@ import { handleAuth, handleLogin, handleLogout, handleCallback } from '@auth0/ne
 
 export default handleAuth({
     async login(req, res) {
+        const scope = req.query.scope ? decodeURIComponent(req.query.scope as string) : null
+        const authorizationParams : {
+            connection_scope?: string
+        } = {}
+        if ( scope )
+            authorizationParams.connection_scope = scope
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
+            authorizationParams,
             getLoginState(req) {
                 return {
                     returnTo: req.query.returnTo
