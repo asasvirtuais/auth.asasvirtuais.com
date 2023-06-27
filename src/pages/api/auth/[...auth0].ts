@@ -4,6 +4,11 @@ export default handleAuth({
     async login(req, res) {
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
+            authorizationParams: {
+                scope: 'openid profile email' + (
+                    req.query.scope ? ' ' + decodeURIComponent(req.query.scope as string) : ''
+                )
+            },
             getLoginState(req) {
                 return {
                     returnTo: req.query.returnTo
@@ -13,9 +18,11 @@ export default handleAuth({
     },
     async callback(req, res) {
         await handleCallback(req, res, {
+            
             afterCallback(_req, res, session, state) {
                 if ( state && state.returnTo )
-                    res.redirect(state.returnTo)
+                    res.redirect(decodeURIComponent(state.returnTo))
+                console.log(session)
                 return session
             }
         })
