@@ -5,9 +5,10 @@ export default handleAuth({
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
             authorizationParams: {
-                scope: 'openid profile email' + (
-                    req.query.scope ? ' ' + decodeURIComponent(req.query.scope as string) : ''
-                )
+                scope: 'email%20profile%20openid%20w_member_social'
+                // (
+                //     req.query.scope ? ' ' + decodeURIComponent(req.query.scope as string) : ''
+                // )
             },
             getLoginState(req) {
                 return {
