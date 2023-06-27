@@ -5,5 +5,10 @@ export default handleAuth({
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string
         })
+    },
+    async logout(req, res) {
+        await handleLogout(req, res, {
+            returnTo: req.query.returnTo as string
+        })
     }
 })
