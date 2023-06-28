@@ -8,10 +8,10 @@ export default handleAuth({
             connection_scope?: string
             connection?: string
         } = {}
-        if ( scope && connection ) {
-            authorizationParams.connection = connection
+        if ( scope )
             authorizationParams.connection_scope = scope
-        }
+        if ( connection )
+            authorizationParams.connection = connection
         await handleLogin(req, res, {
             returnTo: req.query.returnTo as string,
             authorizationParams,
