@@ -23,12 +23,14 @@ export default handleAuth({
         })
     },
     async callback(req, res) {
+        const code = req.query.code as string
         await handleCallback(req, res, {
-            
             afterCallback(_req, res, session, state) {
-                if ( state && state.returnTo )
-                    res.redirect(decodeURI(state.returnTo))
-                console.log(session)
+                if ( state && state.returnTo ) {
+                    const url = new URL(decodeURI(state.returnTo))
+                    url.searchParams.append('code', code)
+                    res.redirect(url.toString())
+                }
                 return session
             }
         })
