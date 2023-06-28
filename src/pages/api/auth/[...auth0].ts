@@ -1,5 +1,9 @@
 import { handleAuth, handleLogin, handleLogout, handleCallback } from '@auth0/nextjs-auth0'
 
+const env = process.env.NODE_ENV
+const isDev = env === 'development'
+const url = isDev ? 'https://auth.localhost' : 'https://auth.asasvirtuais.com'
+
 export default handleAuth({
     async login(req, res) {
         const scope = req.query.scope ? decodeURIComponent(req.query.scope as string) : null
@@ -23,12 +27,15 @@ export default handleAuth({
         })
     },
     async callback(req, res) {
-        const code = req.query.code 
+        if ( !! req.query.code && req.query.state === 'token' && !! req.query.returnTo )
+            return res.redirect(`${url}/api/auth/token?code=${
+                req.query.code
+            }&returnTo=${
+                decodeURIComponent(req.query.returnTo as string)
+            }`)
+
         await handleCallback(req, res, {
             afterCallback(_req, res, session, state) {
-                // const url = new URL(decodeURI(state.returnTo))
-                // url.searchParams.append('code', code)
-                // res.redirect(url.toString())
                 if ( state && state.returnTo )
                     res.redirect(decodeURI(state.returnTo))
                 console.log(session)
