@@ -9,7 +9,7 @@ export default withApiAuthRequired( async (req, res) => {
     const returnTo = decodeURIComponent(req.query.returnTo as string)
     const code = req.query.code as string
     if ( ! code )
-        res.redirect(`https://asasvirtuais.us.auth0.com/authorize?response_type=code&client_id=${process.env.AUTH0_CLIENT_ID}&redirect_uri=${encodeURIComponent(`${url}/api/auth/callback?returnTo=${req.query.returnTo}`)}&scope=${encodeURIComponent('openid profile email')}&audience=${encodeURIComponent('https://auth.asasvirtuais.com')}&state=token`)
+        return res.redirect(`https://asasvirtuais.us.auth0.com/authorize?response_type=code&client_id=${process.env.AUTH0_CLIENT_ID}&redirect_uri=${encodeURIComponent(`${url}/api/auth/callback?returnTo=${req.query.returnTo}`)}&scope=${encodeURIComponent('openid profile email')}&audience=${encodeURIComponent('https://auth.asasvirtuais.com')}&state=token`)
 
     const result : {
         access_token: string, refresh_token: string, id_token: string, token_type: 'Bearer'
@@ -21,7 +21,7 @@ export default withApiAuthRequired( async (req, res) => {
             grant_type: 'authorization_code',
             client_id: process.env.AUTH0_CLIENT_ID as string,
             client_secret: process.env.AUTH0_CLIENT_SECRET as string,
-            redirect_uri: `https://auth.asasvirtuais.com/api/auth/callback`
+            redirect_uri: `${url}/api/auth/callback`
         })
     }).then( res => res.json() ).catch( console.error )
 

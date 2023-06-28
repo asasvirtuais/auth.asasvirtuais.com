@@ -17,12 +17,14 @@ export default handleAuth({
         if ( connection )
             authorizationParams.connection = connection
         await handleLogin(req, res, {
-            returnTo: req.query.returnTo as string,
             authorizationParams,
             getLoginState(req) {
-                return {
-                    returnTo: req.query.returnTo
+                if ( req.query.returnTo ) {
+                    return {
+                        returnTo: decodeURIComponent(req.query.returnTo as string)
+                    }
                 }
+                return {}
             }
         })
     },
@@ -34,14 +36,7 @@ export default handleAuth({
                 decodeURIComponent(req.query.returnTo as string)
             }`)
 
-        await handleCallback(req, res, {
-            afterCallback(_req, res, session, state) {
-                if ( state && state.returnTo )
-                    res.redirect(decodeURI(state.returnTo))
-                console.log(session)
-                return session
-            }
-        })
+        await handleCallback(req, res)
     },
     async logout(req, res) {
         const options : {
