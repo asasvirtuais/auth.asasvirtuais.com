@@ -23,7 +23,7 @@ export default handleAuth({
         })
     },
     async callback(req, res) {
-        const code = req.query.code
+        const code = req.query.code 
         await handleCallback(req, res, {
             afterCallback(_req, res, session, state) {
                 // const url = new URL(decodeURI(state.returnTo))
