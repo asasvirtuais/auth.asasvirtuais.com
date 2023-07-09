@@ -2,9 +2,14 @@ import { Alert, AlertDescription, AlertIcon, AlertTitle, AspectRatio, Avatar, Bo
 import Chakra from '@/chakra'
 import Footer from '../components/footer'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { useEffect } from 'react'
 
 export default function Home() {
     const { user, isLoading, error } = useUser()
+    
+    useEffect( () => {
+        fetch('/api/auth/profile').then(console.log)
+    }, [] )
     return (
         <Chakra>
             <Flex flexDir='column' justifyContent='space-between' h='100vh'>
