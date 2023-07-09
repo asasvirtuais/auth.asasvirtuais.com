@@ -18,6 +18,7 @@
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
     "@vercel/analytics": "^1.0.1",
+    "auth0": "4.0.0-beta.5",
     "framer-motion": "^10.12.16",
     "next": "13.4.4",
     "next-seo": "^6.0.0",

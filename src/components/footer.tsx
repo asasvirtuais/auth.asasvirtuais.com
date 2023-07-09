@@ -58,8 +58,9 @@ export default function Footer() {
             color='gray.700'>
             <Container
                 as={Stack}
-                maxW={'6xl'}
+                maxW='container.lg'
                 py={4}
+                px={0}
                 direction={{ base: 'column', md: 'row' }}
                 spacing={4}
                 justify={{ base: 'center', md: 'space-between' }}
