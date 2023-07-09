@@ -6,10 +6,6 @@ import { useEffect } from 'react'
 
 export default function Home() {
     const { user, isLoading, error } = useUser()
-    
-    useEffect( () => {
-        fetch('/api/auth/profile').then(console.log)
-    }, [] )
     return (
         <Chakra>
             <Flex flexDir='column' justifyContent='space-between' h='100vh'>
