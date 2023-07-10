@@ -1,5 +1,5 @@
 import { useUserHook } from '@/hooks/use-user'
-import { Box, Button, Card, CardBody, CardFooter, Checkbox, Code, FormControl, FormLabel, HStack, Heading, Skeleton, Textarea, VStack } from '@chakra-ui/react'
+import { Box, Card, CardBody, CardFooter, FormControl, FormLabel, HStack, Skeleton, Textarea, VStack } from '@chakra-ui/react'
 
 export default function Account (){
     const { user, loading } = useUserHook()
