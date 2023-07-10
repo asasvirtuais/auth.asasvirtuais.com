@@ -1,3 +1,5 @@
+import { getSession } from "@auth0/nextjs-auth0"
+import { NextApiRequest, NextApiResponse } from "next"
 
 export const getAccessToken = async () => {
     const tokenRequest = await fetch(`https://asasvirtuais.us.auth0.com/oauth/token`, {
@@ -13,4 +15,16 @@ export const getAccessToken = async () => {
     if ( ! token )
         throw new Error('Unable to retrieve access token')
     return token
+}
+
+export const getIdPToken = async ( req: NextApiRequest, res: NextApiResponse, idp: string ) : Promise<string | null> => {
+    const session = await getSession(req, res)
+    const id = session?.user?.sub as string
+    const token = await getAccessToken()
+    const user = await fetch(`https://asasvirtuais.us.auth0.com/api/v2/users/${id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    }).then( res => res.json() )
+    return user.identities.find( (i: any) => i.provider === idp )?.access_token
 }

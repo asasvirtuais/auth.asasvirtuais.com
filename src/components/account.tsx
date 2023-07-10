@@ -66,7 +66,7 @@ export default function Account (){
                             <Box>
                                 {user?.identities?.filter( (i: any) => i.isSocial )?.map( (i: any) => (
                                     <Box key={i.user_id}>
-                                        {i.provider === 'google-oauth2' ? 'google' : i.provider === 'oauth' ? i.provider : i.user_id.split('|')[0]}
+                                        {i.connection === 'google-oauth2' ? 'google' : i.connection}
                                     </Box>
                                 ) )}
                                 </Box>
