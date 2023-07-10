@@ -8,8 +8,7 @@ export const getAccessToken = async () => {
             process.env.AUTH0_CLIENT_SECRET
         }","audience":"https://asasvirtuais.us.auth0.com/api/v2/","grant_type":"client_credentials"}`,
         headers: {'content-type': 'application/json'},
-    }).then( res => res.json() ).catch(console.log)
-    console.log(tokenRequest)
+    }).then( res => res.json() )
     const token = tokenRequest.access_token
     if ( ! token )
         throw new Error('Unable to retrieve access token')
