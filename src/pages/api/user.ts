@@ -1,12 +1,7 @@
 import { getAccessToken } from '@/token'
-import {
-    // getAccessToken,
-getSession, withApiAuthRequired } from '@auth0/nextjs-auth0'
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0'
 
 export default withApiAuthRequired( async (req, res) => {
-    // const token = (await getAccessToken(req, res, {
-    //     scopes: ['openid', 'email', 'profile', 'read:users', 'read:user_idp_tokens']
-    // })).accessToken
     const session = await getSession(req, res)
     const token = await getAccessToken()
     const id = session?.user?.sub

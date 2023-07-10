@@ -1,8 +1,9 @@
-import { useUserHook } from '@/hooks/use-user'
-import { Box, Card, CardBody, CardFooter, FormControl, FormLabel, HStack, Skeleton, Textarea, VStack } from '@chakra-ui/react'
+import { useUser } from '@/hooks/use-user'
+import { Box, Card, CardBody, CardFooter, FormControl, FormLabel, HStack, Input, Skeleton, Textarea, VStack } from '@chakra-ui/react'
+import Merge from './merge'
 
 export default function Account (){
-    const { user, loading } = useUserHook()
+    const { user, loading } = useUser()
     return (
         <Card>
             <CardBody as={VStack} minW='320px' gap={8} >
@@ -81,6 +82,7 @@ export default function Account (){
                             </Box>
                     )}
                 </FormControl>
+                <Merge/>
             </CardBody>
             <CardFooter>
                 <HStack w='100%' justifyContent='space-between'>
