@@ -45,6 +45,7 @@ export function useMergeHook() {
         error,
         loading,
         merge,
+        setMerge
     }
 }
 
@@ -52,7 +53,7 @@ export function useUserHook () {
     const [user, setUser] = useState<Identity>()
     const [error, setError] = useState()
     const [loading, setLoading] = useBoolean(true)
-    const { merge } = useMergeHook()
+    const { merge, setMerge } = useMergeHook()
     useEffect( () => {
         fetch('/api/user').then( async res => {
             if ( res.status !== 200 )
@@ -69,6 +70,7 @@ export function useUserHook () {
         merge,
         error,
         loading,
+        setMerge
     }
 }
 
