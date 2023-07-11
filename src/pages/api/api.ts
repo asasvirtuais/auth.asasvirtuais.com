@@ -1,5 +1,5 @@
-import { getIdPToken } from "@/token";
-import { withApiAuthRequired } from "@auth0/nextjs-auth0";
+import { getIdPToken } from '@/token'
+import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 
 export default withApiAuthRequired( async (req, res) => {
     return
