@@ -1,19 +1,7 @@
 import { useUser } from '@/hooks/use-user'
 import { Box, Card, CardBody, CardFooter, FormControl, FormLabel, HStack, Input, Skeleton, Textarea, VStack } from '@chakra-ui/react'
 import Merge from './merge'
-import { TokenInfoProvider, useTokenInfo } from '@/hooks/use-token'
-
-const TokenInfo = () => {
-    const { info } = useTokenInfo()
-    return (
-        <FormControl>
-            <FormLabel>
-                <b>Token Info</b>
-                <Textarea isDisabled rows={12} value={JSON.stringify(info, null, 4)}/>
-            </FormLabel>
-        </FormControl>
-    )
-}
+import Tokens from './tokens'
 
 export default function Account (){
     const { user, loading } = useUser()
@@ -109,10 +97,8 @@ export default function Account (){
                             )
                         }
                     </FormLabel>
-                <TokenInfoProvider>
-                    <TokenInfo/>
-                </TokenInfoProvider>
                 </FormControl>
+                <Tokens/>
                 <Merge/>
             </CardBody>
             <CardFooter>
