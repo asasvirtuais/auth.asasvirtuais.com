@@ -26,5 +26,5 @@ export const getIdPToken = async ( req: NextApiRequest, res: NextApiResponse, id
             authorization: `Bearer ${token}`
         }
     }).then( res => res.json() )
-    return user.identities.find( (i: any) => i.provider === idp )?.access_token
+    return user.identities.find( (i: any) => i.connection === idp )?.access_token
 }

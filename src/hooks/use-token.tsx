@@ -11,9 +11,12 @@ const useTokenInfoHook = ( provider: string ) => {
         setLoading.on()
         fetch(`/api/${provider}/tokeninfo`)
         .then(res => {
+            console.log(res.status)
+            if ( res.status === 404 )
+                setWarning('Token info endpoint not implemented for this provider')
             if ( res.status === 400 )
                 setWarning('Failed to retrieve access token info')
-            else if ( res.status === 404 )
+            else if ( res.status === 401 )
                 setWarning('Not authenticated with provider account')
             return res.json()
         })
@@ -37,8 +40,9 @@ export const TokenInfoProvider = ( {
 } : React.PropsWithChildren<{
     provider: string
 }> ) => {
+    const context = useTokenInfoHook(provider)
     return (
-        <ContextProvider value={useTokenInfoHook(provider)}>
+        <ContextProvider value={context}>
             {children}
         </ContextProvider>
     )

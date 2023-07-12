@@ -1,12 +1,14 @@
 import { TokenInfoProvider, useTokenInfo } from '@/hooks/use-token'
 import { useUser } from '@/hooks/use-user'
-import { FormControl, FormLabel, Textarea, VStack } from '@chakra-ui/react'
-import { useMemo } from 'react'
+import { FormControl, FormLabel, Skeleton, Textarea, VStack } from '@chakra-ui/react'
+import { useEffect, useMemo } from 'react'
 
 const TokenInfo = () => {
-    const { info, warning } = useTokenInfo()
-    return (
-        <Textarea isDisabled rows={12} value={JSON.stringify(info, null, 4) ?? warning}/>
+    const { info, warning, loading } = useTokenInfo()
+    return loading ? (
+        <Skeleton h='281.23px' w='100%'/>
+    ) : (
+        <Textarea isDisabled rows={12} value={warning ?? JSON.stringify(info, null, 4)}/>
     )
 }
 const IdentityTokenInfo = ( {provider} : {provider:string} ) => {

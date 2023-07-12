@@ -5,6 +5,8 @@ const client_id = process.env.LINKEDIN_CLIENT_ID as string
 const client_secret = process.env.LINKEDIN_CLIENT_SECRET as string
 export default withApiAuthRequired( async (req, res) => {
     const token = await getIdPToken(req, res, 'linkedin')
+    if ( ! token )
+        return res.status(401).end()
     var body = []
     const data = {
         client_id,
@@ -17,7 +19,7 @@ export default withApiAuthRequired( async (req, res) => {
         body.push(key + '=' + value)
     }
     const dataString = body.join('&')
-    const result = await fetch(`https://www.linkedin.com/oauth/v2/introspectToken?client_id=${
+    const response = await fetch(`https://www.linkedin.com/oauth/v2/introspectToken?client_id=${
         client_id
     }&client_secret=${
         client_secret
@@ -29,6 +31,15 @@ export default withApiAuthRequired( async (req, res) => {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: dataString
-    }).then( res => res.json() )
-    res.json(result)
+    })
+
+    if ( response.ok ) {
+        const result = await response.json()
+        if ( result.error )
+            res.status(400).end()
+        else
+            res.json(result)
+    }
+    else
+        res.status(400).end()
 })
