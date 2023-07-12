@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 const MergeIdentity = ( p : any ) => {
     const { user, setMerge } = useUser()
 
-    const identity = p?.identities?.find( p => !! p.connection )
+    const identity = p?.identities?.find( (p: any) => !! p.connection )
     const connection = identity?.connection
     const skip = p.user_id === user?.user_id
     const [loading, setLoading] = useBoolean()
