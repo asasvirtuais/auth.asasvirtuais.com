@@ -1,11 +1,9 @@
 import { extendTheme } from '@chakra-ui/react'
-import { comfortaa } from './font'
+import { comfortaa, majorMonoDisplay } from './font'
 
 export default extendTheme({
     fonts: {
-        fonts: {
-            body: comfortaa.style.fontFamily,
-            heading: comfortaa.style.fontFamily,
-        },
+        body: comfortaa.style.fontFamily,
+        heading: majorMonoDisplay.style.fontFamily,
     }
 })

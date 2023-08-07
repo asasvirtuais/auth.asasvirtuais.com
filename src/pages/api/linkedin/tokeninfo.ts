@@ -7,7 +7,7 @@ export default withApiAuthRequired( async (req, res) => {
     const token = await getIdPToken(req, res, 'linkedin')
     if ( ! token )
         return res.status(401).end()
-    var body = []
+    const body = []
     const data = {
         client_id,
         client_secret,

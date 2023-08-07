@@ -1,20 +1,21 @@
 import { useUser } from '@/hooks/use-user'
-import { Box, Card, CardBody, CardFooter, FormControl, FormLabel, HStack, Input, Skeleton, Textarea, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Card, CardBody, CardFooter, FormControl, FormLabel, HStack, Image, Input, Skeleton, Textarea, VStack } from '@chakra-ui/react'
 import Merge from './merge'
 import Tokens from './tokens'
 
 export default function Account (){
     const { user, loading } = useUser()
     return (
-        <Card>
+        <Card my={8}>
             <CardBody as={VStack} minW='320px' gap={8} >
+                <Avatar mx='auto' size='2xl' src={user?.picture} />
                 <FormControl>
                     <FormLabel>
                         <b>Email</b>
                         {loading ? (
                             <Skeleton h={6} />
                         ) : (
-                            <Input isDisabled value={user?.email} />
+                            <Input style={{opacity: 1}} isDisabled value={user?.email} />
                         )}
                     </FormLabel>
                 </FormControl>
@@ -25,7 +26,7 @@ export default function Account (){
                             (
                                 <Skeleton h={6} />
                             ) : (
-                                <Input isDisabled value={user?.given_name} />
+                                <Input style={{opacity: 1}} isDisabled value={user?.given_name} />
                             )
                         }
                     </FormLabel>
@@ -36,7 +37,7 @@ export default function Account (){
                         {loading ? (
                                 <Skeleton h={6} />
                             ) : (
-                                <Input isDisabled value={user?.family_name} />
+                                <Input style={{opacity: 1}} isDisabled value={user?.family_name} />
                             )
                         }
                     </FormLabel>
@@ -47,7 +48,7 @@ export default function Account (){
                         {loading ? (
                                 <Skeleton h={6} />
                             ) : (
-                                <Input isDisabled value={user?.nickname} />
+                                <Input style={{opacity: 1}} isDisabled value={user?.nickname} />
                             )
                         }
                     </FormLabel>
