@@ -1,10 +1,6 @@
 import type { AppProps } from 'next/app'
-import { Comfortaa } from 'next/font/google'
 import Chakra from '@/chakra'
-
-const comfortaa = Comfortaa({
-  subsets: ['latin']
-})
+import { comfortaa } from '@/font'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

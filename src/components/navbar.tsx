@@ -14,7 +14,6 @@ export default function Navbar() {
     const { toggleColorMode } = useColorMode()
     return (
         <>
-            <Box display={{base: 'block', md: 'none'}} h='72px' w='100%' ></Box>
             <Box position='fixed' top={0} left={0} right={0} w='100vw' zIndex={10}>
                 <Container maxW='container.xl'>
                     <Center justifyContent='space-between' minH='72px'>

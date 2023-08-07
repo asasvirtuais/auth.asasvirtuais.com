@@ -1,8 +1,7 @@
-import { Box, Icon, Text, Center, Container, Heading, SimpleGrid, VStack, chakra, Link, Button } from '@chakra-ui/react'
+import { Box, Text, Center, Container, Heading, SimpleGrid, VStack, chakra, Link, Button } from '@chakra-ui/react'
 import Chakra from '@/chakra'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import { BsGithub } from 'react-icons/bs'
 import Github from '@/components/github'
 
 const Video = () => (
@@ -63,9 +62,9 @@ export default function Home() {
     return (
         <Chakra>
             <Navbar />
-            <Container as='main' maxW='container.xl'>
+            <Container as='main' maxW='container.xl' pt={{base: '72px', md: '0px'}}>
                 <Center flexDir='column' w='100%' minH='100vh'>
-                    <SimpleGrid w='100%' columns={{base: 1, md: 2}}>
+                    <SimpleGrid w='100%' gap={4} columns={{base: 1, md: 2}}>
                         <LogoBox/>
                         <InfoBox/>
                     </SimpleGrid>
