@@ -14,7 +14,7 @@ export default function Navbar() {
     const { toggleColorMode } = useColorMode()
     return (
         <>
-            <Box position='fixed' top={0} left={0} right={0} w='100vw' zIndex={10}>
+            <Box position='absolute' top={0} left={0} right={0} w='100%' zIndex={10}>
                 <Container maxW='container.xl'>
                     <Center justifyContent='space-between' minH='72px'>
                         <Heading as={Link} href='/'

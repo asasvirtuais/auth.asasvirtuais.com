@@ -25,35 +25,10 @@ type Identity = Partial<{
     }[]
 }>
 
-export function useMergeHook() {
-    const [error, setError] = useState()
-    const [loading, setLoading] = useBoolean()
-    const [merge, setMerge] = useState<Identity[]>()
-
-    useEffect( () => {
-        fetch('/api/merge')
-        .then( res => {
-            if ( ! res.ok )
-                throw new Error('Unable to retrieve accounts to merge')
-            return res.json()
-        } )
-        .then( setMerge )
-        .catch( setError )
-        .finally( setLoading.off )
-    }, [] )
-    return {
-        error,
-        loading,
-        merge,
-        setMerge
-    }
-}
-
 export function useUserHook () {
     const [user, setUser] = useState<Identity>()
     const [error, setError] = useState()
     const [loading, setLoading] = useBoolean(true)
-    const { merge, setMerge } = useMergeHook()
     useEffect( () => {
         fetch('/api/user').then( async res => {
             if ( res.status !== 200 )
@@ -67,10 +42,8 @@ export function useUserHook () {
     }, [] )
     return {
         user,
-        merge,
         error,
         loading,
-        setMerge
     }
 }
 
