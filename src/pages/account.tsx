@@ -5,6 +5,9 @@ import Footer from '@/components/footer'
 import AccountProfilePicture from '@/components/account-profile-picture'
 import { UserProvider } from '@/hooks/use-user'
 import AccountDetails from '@/components/account-details'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
+
+export const getServerSideProps = withPageAuthRequired()
 
 export default function Account() {
     return (
