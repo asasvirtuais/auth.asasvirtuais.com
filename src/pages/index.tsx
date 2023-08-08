@@ -39,7 +39,7 @@ const Slogan = () => (
 
 const BottomText = () => (
     <>
-        <Text maxW='50ch' textAlign='center' fontSize='lg'>This Open Source project is an user account platform made with <Link href='https://nextjs.org/' target='_blank'>NextJS</Link> and <Link href='https://auth0.com/' target='_blank' isExternal>Auth0</Link></Text>
+        <Text maxW='50ch' textAlign='center' fontSize='lg'>This open-source project is an user account platform made with <Link href='https://nextjs.org/' target='_blank'>NextJS</Link> and <Link href='https://auth0.com/' target='_blank' isExternal>Auth0</Link></Text>
         <Github/>
     </>
 )
