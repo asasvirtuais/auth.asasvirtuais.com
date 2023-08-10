@@ -1,6 +1,5 @@
 {
-  "name": "auth.asasvirtuais.com",
-  "version": "0.1.0",
+  "name": "@asasvirtuais/auth",
   "private": true,
   "scripts": {
     "dev": "next dev -p 5000",

@@ -11,8 +11,8 @@ export default handleAuth({
         })
     },
     async logout(req, res) {
-        if ( req.query.returnTo )
-            res.redirect(req.query.returnTo as string)
-        await handleLogout(req, res)
+        await handleLogout(req, res, {
+            returnTo: req.query.returnTo as string | undefined
+        })
     }
 })
