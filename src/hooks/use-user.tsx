@@ -30,7 +30,7 @@ export function useUserHook () {
     const [error, setError] = useState()
     const [loading, setLoading] = useBoolean(true)
     useEffect( () => {
-        fetch('/api/user').then( async res => {
+        fetch('/api/users/me').then( async res => {
             if ( res.status !== 200 )
                 throw new Error('Unable to retrieve user')
             const json = await res.json()
