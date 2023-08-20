@@ -1,5 +1,18 @@
-import { getSession } from "@auth0/nextjs-auth0"
-import { NextApiRequest, NextApiResponse } from "next"
+import { getSession } from '@auth0/nextjs-auth0'
+import { NextApiRequest, NextApiResponse } from 'next'
+
+const memory : {
+    [TOKEN in string]: any
+} = {}
+
+export const getTokenInfoFromMemory = ( token: string ) => {
+    return memory[token]
+}
+
+export const saveTokenInfoToMemory = ( token: string, info: any ) => {
+    memory[token] = info
+    return info
+}
 
 export const getAccessToken = async () => {
     const tokenRequest = await fetch(`https://asasvirtuais.us.auth0.com/oauth/token`, {

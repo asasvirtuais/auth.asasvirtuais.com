@@ -1,11 +1,13 @@
-import { getIdPToken } from "@/token";
-import { withApiAuthRequired } from "@auth0/nextjs-auth0";
+import { getIdPToken, getTokenInfoFromMemory, saveTokenInfoToMemory } from '@/token'
+import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 
 export default withApiAuthRequired( async (req, res) => {
     const token = await getIdPToken(req, res, 'discord')
-    console.log(token)
     if ( ! token )
         return res.status(401).end()
+    const cached = getTokenInfoFromMemory(token)
+    if ( cached )
+        return res.json(cached)
     const response = await fetch('https://discord.com/api/oauth2/@me', {
         headers: { Authorization: `Bearer ${token}` }
     })
@@ -16,8 +18,8 @@ export default withApiAuthRequired( async (req, res) => {
             console.error(response)
             return res.status(400).end()
         }
-        else
-            return res.json(result)
+        else 
+            return res.json(saveTokenInfoToMemory(token, result))
     } else {
         console.error(response)
         return res.status(400).end()

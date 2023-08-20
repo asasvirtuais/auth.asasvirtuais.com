@@ -1,5 +1,5 @@
-import { getIdPToken } from "@/token";
-import { withApiAuthRequired } from "@auth0/nextjs-auth0";
+import { getIdPToken, getTokenInfoFromMemory, saveTokenInfoToMemory } from '@/token'
+import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 
 const client_id = process.env.LINKEDIN_CLIENT_ID as string
 const client_secret = process.env.LINKEDIN_CLIENT_SECRET as string
@@ -7,6 +7,9 @@ export default withApiAuthRequired( async (req, res) => {
     const token = await getIdPToken(req, res, 'linkedin')
     if ( ! token )
         return res.status(401).end()
+    const cached = getTokenInfoFromMemory(token)
+    if ( cached )
+        return res.json(cached)
     const body = []
     const data = {
         client_id,
@@ -38,7 +41,7 @@ export default withApiAuthRequired( async (req, res) => {
         if ( result.error )
             res.status(400).end()
         else
-            res.json(result)
+            res.json(saveTokenInfoToMemory(token, result))
     }
     else
         res.status(400).end()
