@@ -6,6 +6,8 @@ import AccountProfilePicture from '@/components/account-profile-picture'
 import { UserProvider } from '@/hooks/use-user'
 import AccountDetails from '@/components/account-details'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
+import { Auth0Provider } from '@auth0/auth0-react'
+import { clientId, domain } from '@/util'
 
 export const getServerSideProps = withPageAuthRequired()
 
@@ -15,25 +17,27 @@ export default function Account() {
             <Navbar />
             <Container as='main' maxW='container.xl' w='100%' pt='72px' px={{base: '0px', md: 4}} >
                 <Center minH='100vh' w='100%'>
-                    <UserProvider>
-                        <VStack w='100%'>
-                            <AccountProfilePicture />
-                            <Card as={Tabs} isFitted w='100%'>
-                                <CardHeader px={0} pt={0}>
-                                    <TabList>
-                                        <Tab>Account</Tab>
-                                    </TabList>
-                                </CardHeader>
-                                <CardBody px={0}>
-                                    <TabPanels>
-                                        <TabPanel>
-                                            <AccountDetails/>
-                                        </TabPanel>
-                                    </TabPanels>
-                                </CardBody>
-                            </Card>
-                        </VStack>
-                    </UserProvider>
+                    <Auth0Provider domain={domain} clientId={clientId}>
+                        <UserProvider>
+                            <VStack w='100%'>
+                                <AccountProfilePicture />
+                                <Card as={Tabs} isFitted w='100%'>
+                                    <CardHeader px={0} pt={0}>
+                                        <TabList>
+                                            <Tab>Account</Tab>
+                                        </TabList>
+                                    </CardHeader>
+                                    <CardBody px={0}>
+                                        <TabPanels>
+                                            <TabPanel>
+                                                <AccountDetails/>
+                                            </TabPanel>
+                                        </TabPanels>
+                                    </CardBody>
+                                </Card>
+                            </VStack>
+                        </UserProvider>
+                    </Auth0Provider>
                 </Center>
             </Container>
             <Footer/>

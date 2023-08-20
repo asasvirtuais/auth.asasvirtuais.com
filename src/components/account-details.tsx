@@ -1,6 +1,7 @@
 import { useUser } from '@/hooks/use-user'
 import { Box, FormControl, FormLabel, HStack, Input, Skeleton, VStack } from '@chakra-ui/react'
 import LinkedAccounts from './linked-accounts'
+import LinkAccounts from './link-accounts'
 
 export default function AccountDetails (){
     const { user, loading } = useUser()
@@ -70,6 +71,7 @@ export default function AccountDetails (){
                 </FormLabel>
             </FormControl>
             <LinkedAccounts/>
+            <LinkAccounts/>
             <HStack w='100%' justifyContent='space-between'>
                 <a href='/api/auth/login' >Login</a>
                 <a href='/api/auth/logout' >Logout</a>
