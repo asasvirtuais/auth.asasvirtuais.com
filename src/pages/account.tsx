@@ -22,15 +22,12 @@ export default function Account() {
                                 <CardHeader px={0} pt={0}>
                                     <TabList>
                                         <Tab>Account</Tab>
-                                        <Tab>Profiles</Tab>
                                     </TabList>
                                 </CardHeader>
                                 <CardBody px={0}>
                                     <TabPanels>
                                         <TabPanel>
                                             <AccountDetails/>
-                                        </TabPanel>
-                                        <TabPanel>
                                         </TabPanel>
                                     </TabPanels>
                                 </CardBody>
