@@ -1,17 +1,15 @@
-import { useLinkAccount } from '@/hooks/use-link-account'
 import { Button, VStack } from '@chakra-ui/react'
 
 export default function LinkAccounts() {
-    const { linkAccountProvider } = useLinkAccount()
     return (
         <VStack>
-            <Button onClick={linkAccountProvider('google-oauth2')}>
+            <Button>
                 Link with Google
             </Button>
-            <Button onClick={linkAccountProvider('linkedin')}>
+            <Button>
                 Link with LinkedIn
             </Button>
-            <Button onClick={linkAccountProvider('discord')}>
+            <Button>
                 Link with Discord
             </Button>
         </VStack>
