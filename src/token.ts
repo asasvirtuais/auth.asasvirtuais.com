@@ -30,14 +30,22 @@ export const getAccessToken = async () => {
     return token
 }
 
-export const getIdPToken = async ( req: NextApiRequest, res: NextApiResponse, idp: string ) : Promise<string | null> => {
-    const session = await getSession(req, res)
-    const id = session?.user?.sub as string
+export const getUserById = async ( id: string ) => {
     const token = await getAccessToken()
-    const user = await fetch(`https://asasvirtuais.us.auth0.com/api/v2/users/${id}`, {
+    return fetch(`https://asasvirtuais.us.auth0.com/api/v2/users/${id}`, {
         headers: {
             authorization: `Bearer ${token}`
         }
     }).then( res => res.json() )
-    return user.identities.find( (i: any) => i.connection === idp )?.access_token
+}
+
+export const getIdPTokenByUserId = async ( id: string, provider: string ) => {
+    return (await getUserById(id)).identities.find( (i: any) => i.connection === provider )?.access_token
+}
+
+export const getIdPToken = async ( req: NextApiRequest, res: NextApiResponse, provider: string ) : Promise<string | null> => {
+    const session = await getSession(req, res)
+    const id = session?.user?.sub as string
+    const user = await getIdPTokenByUserId(id, provider)
+    return user.identities.find( (i: any) => i.connection === provider )?.access_token
 }
